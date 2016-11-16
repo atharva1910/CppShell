@@ -1,9 +1,0 @@
-#include <iostream>
-int main()
-{
-  // Main loop
-  int c;
-  do{
-    std::cout << "sh > ";
-  }while(cin >> c != '\n')
-}
