@@ -40,15 +40,12 @@ exeCmd::exec()
   /* 
      Execute the command
   */
-  char *args[MAXARGS];
+  char *args[MAXARGS]={};
   for(int i = 0 ;i < MAXARGS ;i++){
-    args[i] = const_cast<char *>((argv[i]).c_str());
-  }
-  for (int i = 1 ; i < MAXARGS ; i++){
-    args[i] = '\0';
+    if(argv[i] != "")
+      args[i] = const_cast<char *>((argv[i]).c_str());
   }
   execvp(args[0],args);
-
 }
 
 std::string
@@ -60,7 +57,6 @@ exeCmd::path(std::string &d)
   std::string final_cmd;
   final_cmd = "/bin/" + d ;
   return final_cmd;
-
 }
 
 
