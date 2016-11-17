@@ -16,7 +16,7 @@ exeCmd
   void exec(); 
  private:
   std::stringstream ss;
-  std::string argv[MAXARGS]; 
+  std::string argv[MAXARGS];
 };
 
 void
