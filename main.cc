@@ -11,35 +11,57 @@ exeCmd
 {
 
  public:
-  std::string cmd;
-  std::string argv[MAXARGS];
+  std::string path(std::string &);
   void split(std::string);
   void exec(); 
  private:
   std::stringstream ss;
+  std::string argv[MAXARGS]; 
 };
 
-void exeCmd::split(std::string s)
+void
+exeCmd::split(std::string s)
 {
+  /*
+    Split the string into command and arguments
+   */
   int i = 0;
   ss.str(s);
-  ss >> cmd;
   while (ss){
     ss >> argv[i];
     i++;
   }
+  argv[0] = path(argv[0]);
 }
 
-void exeCmd::exec()
+void
+exeCmd::exec()
 {
-  char **argv;
-  std::cout << " inside exec" << std::endl;
-  std::cout << cmd << std::endl;
-  system(const_cast<char *>(cmd.c_str()));
-  //  execv(const_cast<char *>(cmd.c_str()),argv);
-}
-  
+  /* 
+     Execute the command
+  */
+  char *args[MAXARGS];
+  for(int i = 0 ;i < MAXARGS ;i++){
+    args[i] = const_cast<char *>((argv[i]).c_str());
+  }
+  for (int i = 1 ; i < MAXARGS ; i++){
+    args[i] = '\0';
+  }
+  execvp(args[0],args);
 
+}
+
+std::string
+exeCmd::path(std::string &d)
+{
+  /* 
+     Concat /usr/bin to start of cmd
+  */
+  std::string final_cmd;
+  final_cmd = "/bin/" + d ;
+  return final_cmd;
+
+}
 
 
 int
