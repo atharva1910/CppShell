@@ -3,6 +3,8 @@
 #include <string>
 #include <sstream>
 #include <unistd.h>
+#include <sys/wait.h>
+#include <sys/types.h>
 #define MAXARGS 10
 
 
@@ -45,7 +47,17 @@ exeCmd::exec()
     if(argv[i] != "")
       args[i] = const_cast<char *>((argv[i]).c_str());
   }
-  execvp(args[0],args);
+  pid_t pid = fork();
+  if (pid == 0){
+    if(execvp(args[0],args) == -1){
+    std::cout<<"Failed to exec" << std::endl;
+    exit(0);
+    }
+  }
+  else{
+    int status;
+    waitpid(pid, &status,0);
+  }
 }
 
 std::string
@@ -65,8 +77,8 @@ main()
 {
   // Main loop
   std::string c;
-  exeCmd cmd;
   do{
+    exeCmd cmd;
     std::cout << "sh > ";
     std::cin >> c;
     cmd.split(c);
