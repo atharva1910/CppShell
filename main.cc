@@ -8,17 +8,28 @@
 #define MAXARGS 10
 
 
+
 class
 exeCmd
 {
-
- public:
+public:
   std::string path(std::string &);
   void split(std::string);
   void exec(); 
- private:
+private:
   std::stringstream ss;
   std::string argv[MAXARGS];
+  bool pipe_flag = false;
+  bool redir_flag = false;
+};
+
+class
+pipeExe
+{
+public:
+  void pipeEx();
+private:
+  std::string leftCmd[MAXARGS],rightCmd[MAXARGS];
 };
 
 void
@@ -26,14 +37,26 @@ exeCmd::split(std::string s)
 {
   /*
     Split the string into command and arguments
-   */
+  */
   int i = 0;
   ss.str(s);
   while (ss){
     ss >> argv[i];
+    // Check for pipe or redirection of files
+    if (argv[i] == "<" || argv[i] == ">"){
+      redir_flag = true;
+      std::cout << "Redirection not implemented" << std::endl;
+      return;
+    }
+    if (argv[i] == "|"){
+      pipe_flag = true;
+      std::cout << "Pipe not implemented" << std::endl;
+      return;
+    }
     i++;
   }
   argv[0] = path(argv[0]);
+  exec();
 }
 
 void
@@ -50,8 +73,8 @@ exeCmd::exec()
   pid_t pid = fork();
   if (pid == 0){
     if(execvp(args[0],args) == -1){
-    std::cout<<"Failed to exec" << std::endl;
-    exit(0);
+      std::cout<<"Failed to exec" << std::endl;
+      exit(0);
     }
   }
   else{
@@ -82,8 +105,8 @@ main()
     std::cout << "sh > ";
     std::cin >> c;
     cmd.split(c);
-    cmd.exec();
   }while(true);
 }
+
 
 
