@@ -103,7 +103,7 @@ main()
   do{
     exeCmd cmd;
     std::cout << "sh > ";
-    std::cin >> c;
+    std::getline(std::cin,c);
     cmd.split(c);
   }while(true);
 }
