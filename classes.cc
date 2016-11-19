@@ -7,7 +7,8 @@ exeCmd::split(std::string s)
     Split the string into command and arguments
   */
   int i = 0;
-  ss.str(s);
+  std::stringstream ss;
+  ss << s;
   while (ss){
     ss >> argv[i];
     // Check for pipe or redirection of files

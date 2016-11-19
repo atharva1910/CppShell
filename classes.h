@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
+
 class
 exeCmd
 {
@@ -18,7 +19,6 @@ public:
   void split(std::string);
   void exec(); 
 private:
-  std::stringstream ss;
   std::string argv[MAXARGS];
   bool pipe_flag = false;
   bool redir_flag = false;
