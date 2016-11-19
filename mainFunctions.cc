@@ -13,8 +13,10 @@ check_alias(std::string cmd)
     temp >> argv[i];
     i++;
   }
+  //Clear stream
+  temp.str("");
+  temp.clear();
   while(getline(myfile,input)){
-    std::stringstream temp;
     temp << input;
     temp >> two;
     //compare the first word
