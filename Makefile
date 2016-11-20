@@ -3,7 +3,7 @@ CXXFLAGS = -Wall -g
 all:main
 
 main:classes.o mainFunctions.o main.o 
-	$(CXX) classes.o main.o mainFunctions.o -o main
+	$(CXX) $(CXXFLAGS) classes.o main.o mainFunctions.o -o main
 
 main.o:main.cc classes.h
 	$(CXX) $(CXXFLAGS) -c main.cc

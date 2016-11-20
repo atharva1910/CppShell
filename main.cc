@@ -11,6 +11,10 @@ main()
       std::cout << "sh > ";
       std::getline(std::cin,c);
       cmnd=check_alias(c);
+      if(cmnd == c){
+	if(check_string(c))
+	  cmnd=execute_pwd(c);
+      }
       cmd.split(cmnd);
     }while(true);
 }

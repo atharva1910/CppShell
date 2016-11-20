@@ -24,7 +24,9 @@ exeCmd::split(std::string s)
     }
     i++;
   }
-  argv[0] = path(argv[0]);
+  //check the dir
+  if (argv[0].substr(0,4) != "/usr/")
+    argv[0] = path(argv[0]);
   exec();
 }
 
@@ -34,6 +36,7 @@ exeCmd::exec()
   /* 
      Execute the command
   */
+
   char *args[MAXARGS]={};
   for(int i = 0 ;i < MAXARGS ;i++){
     if(argv[i] != "")
@@ -50,6 +53,8 @@ exeCmd::exec()
     int status;
     waitpid(pid, &status,0);
   }
+
+
 }
 
 std::string

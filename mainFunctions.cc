@@ -1,11 +1,24 @@
 #include "mainFunctions.h"
 #define MAXARGS 10
+
+bool
+check_string(std::string cmd)
+{
+  std::string s;
+  s = cmd.substr(0,2);
+  if ( s == "./")
+    return true;
+  return false;   
+    
+}
+
+
 std::string
 check_alias(std::string cmd)
 {
   std::ifstream myfile ("config");
   std::stringstream result,temp;
-  std::string one,two,input,argv[MAXARGS];
+  std::string input,argv[MAXARGS],one;
   int i = 0;
   temp << cmd;
   //seperate into string array
@@ -17,6 +30,9 @@ check_alias(std::string cmd)
   temp.str("");
   temp.clear();
   while(getline(myfile,input)){
+    std::string two;
+    temp.str("");
+    temp.clear();    
     temp << input;
     temp >> two;
     //compare the first word
@@ -37,3 +53,18 @@ check_alias(std::string cmd)
   return cmd;
 }
 
+
+std::string
+execute_pwd(std::string c)
+{
+  /*
+    get path the current working directory
+   */
+  char path[256];
+  std::stringstream ss;
+  std::string s= c.substr(3);
+  getcwd(path,256);
+  ss << path;
+  ss<<"/"<<s;
+  return ss.str();
+}
