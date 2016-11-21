@@ -62,7 +62,7 @@ execute_pwd(std::string c)
    */
   char path[256];
   std::stringstream ss;
-  std::string s= c.substr(3);
+  std::string s= c.substr(2);
   getcwd(path,256);
   ss << path;
   ss<<"/"<<s;

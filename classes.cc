@@ -25,13 +25,17 @@ exeCmd::split(std::string s)
     i++;
   }
   //check the dir
-  if (argv[0].substr(0,4) != "/usr/")
+  //std::string check = argv[0];
+  if (argv[0].substr(0,5) != "/home"){
+    std::cout << argv[0].substr(0,4);
     argv[0] = path(argv[0]);
+  }
   exec();
 }
 
 void
 exeCmd::exec()
+
 {
   /* 
      Execute the command
