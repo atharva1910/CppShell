@@ -1,0 +1,3 @@
+/home/qwn/Documents/shell/bin/CMakeFiles/edit_cache.dir
+/home/qwn/Documents/shell/bin/CMakeFiles/rebuild_cache.dir
+/home/qwn/Documents/shell/bin/CMakeFiles/shell.dir

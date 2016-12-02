@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/shell.dir/src/main.cc.o CMakeFiles/shell.dir/src/classes.cc.o CMakeFiles/shell.dir/src/mainFunctions.cc.o  -o shell -rdynamic 
